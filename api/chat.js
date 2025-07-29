@@ -1,13 +1,13 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
-  // 🔐 CORS headers – wymagane dla Power BI
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // ✅ Nagłówki CORS wymagane przez przeglądarkę / Power BI:
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // ⚙️ Obsługa preflight (OPTIONS)
-  if (req.method === 'OPTIONS') {
+  // ✅ Obsługa "preflight" → odpowiadamy na OPTIONS
+  if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
 
@@ -38,3 +38,7 @@ module.exports = async (req, res) => {
     });
   }
 };
+// ✅ Dodatkowe nagłówki CORS, jeśli potrzebne
+res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+res.setHeader("Access-Control-Allow-Credentials", "true");  
